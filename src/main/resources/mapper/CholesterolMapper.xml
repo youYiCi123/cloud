@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jxm.health.mapper.CholesterolMapper">
+
+    <insert id="insert" parameterType="com.jxm.health.model.CholesterolModel">
+        insert into cholesterol
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="CHO != null">
+                CHO,
+            </if>
+            <if test="testTime != null">
+                test_time
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="CHO != null">
+                #{CHO,jdbcType=FLOAT},
+            </if>
+            <if test="testTime != null">
+                #{testTime,jdbcType=TIMESTAMP}
+            </if>
+        </trim>
+    </insert>
+
+    <select id="getLastedData" resultType="com.jxm.health.dto.CholesterolDto">
+        select
+        CHO,test_time
+        from cholesterol
+        where user_id=#{userId}
+        order by test_time desc limit 1
+    </select>
+
+    <select id="getItemHistory" resultType="com.jxm.health.dto.CholesterolDto">
+        select
+        CHO,test_time
+        from cholesterol
+        where user_id=#{userId}
+        order by test_time desc
+    </select>
+
+</mapper>

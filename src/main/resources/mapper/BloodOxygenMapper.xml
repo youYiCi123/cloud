@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jxm.health.mapper.BloodOxygenMapper">
+
+    <insert id="insert" parameterType="com.jxm.health.model.BloodOxygenModel">
+        insert into blood_oxygen
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="XY != null">
+                XY,
+            </if>
+            <if test="HR != null">
+                HR,
+            </if>
+            <if test="testTime != null">
+                test_time
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="XY != null">
+                #{XY,jdbcType=INTEGER},
+            </if>
+            <if test="HR != null">
+                #{HR,jdbcType=INTEGER},
+            </if>
+            <if test="testTime != null">
+                #{testTime,jdbcType=TIMESTAMP}
+            </if>
+        </trim>
+    </insert>
+
+    <select id="getLastedData" resultType="com.jxm.health.dto.BloodOxygenDto">
+        select
+        XY,HR,test_time
+        from blood_oxygen
+        where user_id=#{userId}
+        order by test_time desc limit 1
+    </select>
+
+    <select id="getItemHistory" resultType="com.jxm.health.dto.BloodOxygenDto">
+        select
+        XY,HR,test_time
+        from blood_oxygen
+        where user_id=#{userId}
+        order by test_time desc
+    </select>
+
+</mapper>

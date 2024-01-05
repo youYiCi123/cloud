@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jxm.health.mapper.UricAcidMapper">
+
+    <insert id="insert" parameterType="com.jxm.health.model.UricAcidModel">
+        insert into uric_acid
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="URI != null">
+                URI,
+            </if>
+            <if test="testTime != null">
+                test_time
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="URI != null">
+                #{URI,jdbcType=INTEGER},
+            </if>
+            <if test="testTime != null">
+                #{testTime,jdbcType=TIMESTAMP}
+            </if>
+        </trim>
+    </insert>
+
+    <select id="getLastedData" resultType="com.jxm.health.dto.UricAcidDto">
+        select
+        ua.URI,ua.test_time,ud.gender
+        from uric_acid ua
+        left join user_detail ud
+        on ud.id=ua.user_id
+        where ua.user_id=#{userId}
+        order by ua.test_time desc limit 1
+    </select>
+
+    <select id="getItemHistory" resultType="com.jxm.health.dto.UricAcidDto">
+        select
+        URI,test_time
+        from uric_acid
+        where user_id=#{userId}
+        order by test_time desc
+    </select>
+
+</mapper>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jxm.health.mapper.UserEquipMapper">
+    <resultMap id="BaseResultMap" type="com.jxm.health.model.UserEquipModel">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="dev_id" jdbcType="VARCHAR" property="devId"/>
+        <result column="user_id" jdbcType="BIGINT" property="userId"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,dev_id, user_id
+    </sql>
+
+    <resultMap id="userByEquip" type="com.jxm.health.model.UserByEquipModel">
+        <id property="USERID" column="id"/>
+        <result property="nickName" column="nick_name"/>
+        <result property="avatarUrl" column="avatar_url"/>
+        <result property="gender" column="gender"/>
+    </resultMap>
+
+    <select id="getAllUserByEquip" resultMap="userByEquip">
+        select ud.id,ud.nick_name,ud.avatar_url,ud.gender
+        from user_detail as ud left join user_equip as ue on ud.id=ue.user_id
+        where ue.dev_id=#{devId}
+        order by ud.create_time desc
+    </select>
+
+    <insert id="insertUserEquip" parameterType="com.jxm.health.model.UserEquipModel">
+        insert into user_equip
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="devId != null">
+                dev_id,
+            </if>
+            <if test="userId != null">
+                user_id
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="devId != null">
+                #{devId,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT}
+            </if>
+        </trim>
+    </insert>
+
+</mapper>
