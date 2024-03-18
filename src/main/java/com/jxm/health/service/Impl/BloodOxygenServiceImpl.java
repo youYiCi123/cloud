@@ -13,7 +13,7 @@ public class BloodOxygenServiceImpl implements BloodOxygenService {
     private BloodOxygenMapper bloodOxygenMapper;
 
     @Override
-    public BloodOxygenDto getLastedData(String userId) {
+    public BloodOxygenDto getLastedData(int userId) {
         return bloodOxygenMapper.getLastedData(userId);
     }
 }

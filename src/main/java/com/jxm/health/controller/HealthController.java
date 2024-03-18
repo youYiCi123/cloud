@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.concurrent.ExecutionException;
+
 @Controller
 @RequestMapping("/health")
 @Api(tags = "health", description = "健康管理")
@@ -23,7 +25,7 @@ public class HealthController {
     @ApiOperation("获取实时健康分数")
     @RequestMapping(value = "/getRealTimeScore", method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult getRealTimeScore(@RequestParam("userId") String userId) {
+    public CommonResult getRealTimeScore(@RequestParam("userId") int userId) throws ExecutionException, InterruptedException {
         int realTimeScore = healthService.getRealTimeScore(userId);
         String evaluate="";
         healthEvaluate healthEvaluate = new healthEvaluate();
@@ -40,6 +42,4 @@ public class HealthController {
         healthEvaluate.setEvaluate(evaluate);
         return CommonResult.success(healthEvaluate);
     }
-
-    
 }

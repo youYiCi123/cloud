@@ -28,7 +28,7 @@ public class UserHistoryController {
     @ApiOperation(value = "查找血酮历史详情")
     @RequestMapping(value = "/getBK", method = { RequestMethod.GET})
     @ResponseBody
-    public CommonResult<CommonPage<BloodKetoneDto>> getBK(@RequestParam(value = "userId") String userId,
+    public CommonResult<CommonPage<BloodKetoneDto>> getBK(@RequestParam(value = "userId") int userId,
                                                           @RequestParam(value = "pageSize", defaultValue = "7") Integer pageSize,
                                                           @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         PageHelper.startPage(pageNum, pageSize);
@@ -39,7 +39,7 @@ public class UserHistoryController {
     @ApiOperation(value = "查找血氧历史详情")
     @RequestMapping(value = "/getBO", method = { RequestMethod.GET})
     @ResponseBody
-    public CommonResult<CommonPage<BloodOxygenDto>> getBO(@RequestParam(value = "userId") String userId,
+    public CommonResult<CommonPage<BloodOxygenDto>> getBO(@RequestParam(value = "userId") int userId,
                                                           @RequestParam(value = "pageSize", defaultValue = "7") Integer pageSize,
                                                           @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         PageHelper.startPage(pageNum, pageSize);
@@ -50,7 +50,7 @@ public class UserHistoryController {
     @ApiOperation(value = "查找血压历史详情")
     @RequestMapping(value = "/getBP", method = { RequestMethod.GET})
     @ResponseBody
-    public CommonResult<CommonPage<BloodPressureDto>> getBP(@RequestParam(value = "userId") String userId,
+    public CommonResult<CommonPage<BloodPressureDto>> getBP(@RequestParam(value = "userId") int userId,
                                                           @RequestParam(value = "pageSize", defaultValue = "7") Integer pageSize,
                                                           @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         PageHelper.startPage(pageNum, pageSize);
@@ -61,7 +61,7 @@ public class UserHistoryController {
     @ApiOperation(value = "查找血糖历史详情")
     @RequestMapping(value = "/getBS", method = { RequestMethod.GET})
     @ResponseBody
-    public CommonResult<CommonPage<BloodSugarDto>> getBS(@RequestParam(value = "userId") String userId,
+    public CommonResult<CommonPage<BloodSugarDto>> getBS(@RequestParam(value = "userId") int userId,
                                                          @RequestParam(value = "pageSize", defaultValue = "7") Integer pageSize,
                                                          @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         PageHelper.startPage(pageNum, pageSize);
@@ -72,7 +72,7 @@ public class UserHistoryController {
     @ApiOperation(value = "查找胆固醇历史详情")
     @RequestMapping(value = "/getCHO", method = { RequestMethod.GET})
     @ResponseBody
-    public CommonResult<CommonPage<CholesterolDto>> getCHO(@RequestParam(value = "userId") String userId,
+    public CommonResult<CommonPage<CholesterolDto>> getCHO(@RequestParam(value = "userId") int userId,
                                                             @RequestParam(value = "pageSize", defaultValue = "7") Integer pageSize,
                                                             @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         PageHelper.startPage(pageNum, pageSize);
@@ -83,7 +83,7 @@ public class UserHistoryController {
     @ApiOperation(value = "查找甘油历史详情")
     @RequestMapping(value = "/getTRI", method = { RequestMethod.GET})
     @ResponseBody
-    public CommonResult<CommonPage<GlycerolDto>> getTRI(@RequestParam(value = "userId") String userId,
+    public CommonResult<CommonPage<GlycerolDto>> getTRI(@RequestParam(value = "userId") int userId,
                                                            @RequestParam(value = "pageSize", defaultValue = "7") Integer pageSize,
                                                            @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         PageHelper.startPage(pageNum, pageSize);
@@ -94,9 +94,9 @@ public class UserHistoryController {
     @ApiOperation(value = "查找尿酸历史详情")
     @RequestMapping(value = "/getURI", method = { RequestMethod.GET})
     @ResponseBody
-    public CommonResult<CommonPage<UricAcidDto>> getURI(@RequestParam(value = "userId") String userId,
-                                                           @RequestParam(value = "pageSize", defaultValue = "7") Integer pageSize,
-                                                           @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
+    public CommonResult<CommonPage<UricAcidDto>> getURI(@RequestParam(value = "userId") int userId,
+                                                        @RequestParam(value = "pageSize", defaultValue = "7") Integer pageSize,
+                                                        @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         PageHelper.startPage(pageNum, pageSize);
         List<UricAcidDto> bk = userHistoryService.getURI(userId);
         return CommonResult.success(CommonPage.restPage(bk));

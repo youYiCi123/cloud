@@ -12,7 +12,7 @@ public class UserDto implements Serializable {
     private String avatarUrl;//头像
     private Integer gender;//性别
     private Date birthday;//出生日期
-    private String unionId;//微信平台下的id
+    private String openId;//微信平台下的id
     private String devId;//设备序列号
 
     public String getNickName() {
@@ -47,12 +47,12 @@ public class UserDto implements Serializable {
         this.birthday = birthday;
     }
 
-    public String getUnionId() {
-        return unionId;
+    public String getOpenId() {
+        return openId;
     }
 
-    public void setUnionId(String unionId) {
-        this.unionId = unionId;
+    public void setOpenId(String openId) {
+        this.openId = openId;
     }
 
     public String getDevId() {
@@ -70,7 +70,7 @@ public class UserDto implements Serializable {
                 ", avatarUrl='" + avatarUrl + '\'' +
                 ", gender=" + gender +
                 ", birthday=" + birthday +
-                ", unionId='" + unionId + '\'' +
+                ", openId='" + openId + '\'' +
                 ", devId='" + devId + '\'' +
                 '}';
     }

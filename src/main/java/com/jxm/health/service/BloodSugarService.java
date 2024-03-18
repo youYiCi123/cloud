@@ -4,6 +4,6 @@ import com.jxm.health.dto.BloodSugarDto;
 
 public interface BloodSugarService {
 
-    BloodSugarDto getLastedData(String userId);
+    BloodSugarDto getLastedData(int userId);
 
 }

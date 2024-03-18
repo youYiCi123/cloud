@@ -4,5 +4,5 @@ import com.jxm.health.dto.BloodOxygenDto;
 
 public interface BloodOxygenService {
 
-    BloodOxygenDto getLastedData(String userId);
+    BloodOxygenDto getLastedData(int userId);
 }

@@ -4,5 +4,5 @@ import com.jxm.health.dto.BloodKetoneDto;
 
 public interface BloodKetoneService {
 
-    BloodKetoneDto getLastedData(String userId);
+    BloodKetoneDto getLastedData(int userId);
 }

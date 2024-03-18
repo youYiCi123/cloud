@@ -6,7 +6,6 @@ import com.jxm.health.model.*;
 import com.jxm.health.service.UserDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -44,8 +43,12 @@ public class UserDataServiceImpl implements UserDataService {
         }
         Date testTime = sdf.parse(userHealthDto.getTESTTIME());
         int count =0;
+        System.out.println("====================");
+        System.out.println(userHealthDto);
+        System.out.println("====================");
         //血压
-        if(userHealthDto.getSYS()!=null&&userHealthDto.getDIA()!=null){
+        if(userHealthDto.getSYS()!=null&&userHealthDto.getDIA()!=null&&
+                !userHealthDto.getSYS().equals(0)&&!userHealthDto.getDIA().equals(0)){
             BloodPressureModel bloodPressureModel = new BloodPressureModel();
             bloodPressureModel.setUserId(userHealthDto.getUSERID());
             bloodPressureModel.setSYS(userHealthDto.getSYS());
@@ -55,7 +58,7 @@ public class UserDataServiceImpl implements UserDataService {
             count=bloodPressureMapper.insert(bloodPressureModel);
         }
         //血氧
-        if(userHealthDto.getXY()!=null){
+        if(userHealthDto.getXY()!=null&&!userHealthDto.getXY().equals(0)){
             BloodOxygenModel bloodOxygenModel = new BloodOxygenModel();
             bloodOxygenModel.setUserId(userHealthDto.getUSERID());
             bloodOxygenModel.setXY(userHealthDto.getXY());
@@ -64,7 +67,7 @@ public class UserDataServiceImpl implements UserDataService {
             count=bloodOxygenMapper.insert(bloodOxygenModel);
         }
         //血糖
-        if(userHealthDto.getGLU()!=null){
+        if(userHealthDto.getGLU()!=null&&!userHealthDto.getGLU().equals((float) 0)){
             BloodSugarModel bloodSugarModel = new BloodSugarModel();
             bloodSugarModel.setUserId(userHealthDto.getUSERID());
             bloodSugarModel.setEAT(userHealthDto.getEAT());
@@ -73,7 +76,7 @@ public class UserDataServiceImpl implements UserDataService {
             count=bloodSugarMapper.insert(bloodSugarModel);
         }
         //胆固醇
-        if(userHealthDto.getCHO()!=null){
+        if(userHealthDto.getCHO()!=null&&!userHealthDto.getCHO().equals((float) 0)){
             CholesterolModel cholesterolModel = new CholesterolModel();
             cholesterolModel.setUserId(userHealthDto.getUSERID());
             cholesterolModel.setCHO(userHealthDto.getCHO());
@@ -81,7 +84,7 @@ public class UserDataServiceImpl implements UserDataService {
             count=cholesterolMapper.insert(cholesterolModel);
         }
         //甘油
-        if(userHealthDto.getTRI()!=null){
+        if(userHealthDto.getTRI()!=null&&!userHealthDto.getTRI().equals((float) 0)){
             GlycerolModel glycerolModel = new GlycerolModel();
             glycerolModel.setUserId(userHealthDto.getUSERID());
             glycerolModel.setTRI(userHealthDto.getTRI());
@@ -89,7 +92,7 @@ public class UserDataServiceImpl implements UserDataService {
             count=glycerolMapper.insert(glycerolModel);
         }
         //血酮
-        if(userHealthDto.getBK()!=null){
+        if(userHealthDto.getBK()!=null&&!userHealthDto.getBK().equals((float) 0)){
             BloodKetoneModel bloodKetoneModel = new BloodKetoneModel();
             bloodKetoneModel.setUserId(userHealthDto.getUSERID());
             bloodKetoneModel.setBK(userHealthDto.getBK());
@@ -97,7 +100,7 @@ public class UserDataServiceImpl implements UserDataService {
             count=bloodKetoneMapper.insert(bloodKetoneModel);
         }
         //尿酸
-        if(userHealthDto.getURI()!=null){
+        if(userHealthDto.getURI()!=null&&!userHealthDto.getURI().equals(0)){
             UricAcidModel uricAcidModel = new UricAcidModel();
             uricAcidModel.setUserId(userHealthDto.getUSERID());
             uricAcidModel.setURI(userHealthDto.getURI());

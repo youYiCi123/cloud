@@ -13,7 +13,7 @@ public class BloodKetoneServiceImpl implements BloodKetoneService {
     private BloodKetoneMapper bloodKetoneMapper;
 
     @Override
-    public BloodKetoneDto getLastedData(String userId) {
+    public BloodKetoneDto getLastedData(int userId) {
         return bloodKetoneMapper.getLastedData(userId);
     }
 

@@ -13,7 +13,7 @@ public class UricAcidServiceImpl implements UricAcidService {
     private UricAcidMapper uricAcidMapper;
 
     @Override
-    public UricAcidDto getLastedData(String userId) {
+    public UricAcidDto getLastedData(int userId) {
         return uricAcidMapper.getLastedData(userId);
     }
 }

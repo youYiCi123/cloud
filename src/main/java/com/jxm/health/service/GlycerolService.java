@@ -4,6 +4,6 @@ import com.jxm.health.dto.GlycerolDto;
 
 public interface GlycerolService {
 
-    GlycerolDto getLastedData(String userId);
+    GlycerolDto getLastedData(int userId);
 
 }

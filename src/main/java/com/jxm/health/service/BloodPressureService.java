@@ -4,5 +4,5 @@ import com.jxm.health.dto.BloodPressureDto;
 
 public interface BloodPressureService {
 
-    BloodPressureDto getLastedData(String userId);
+    BloodPressureDto getLastedData(int userId);
 }

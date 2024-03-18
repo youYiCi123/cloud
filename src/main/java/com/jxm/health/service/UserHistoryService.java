@@ -7,18 +7,18 @@ import java.util.Map;
 
 public interface UserHistoryService {
 
-    List<BloodKetoneDto> getBK(String userId);
+    List<BloodKetoneDto> getBK(int userId);
 
-    List<BloodOxygenDto> getBO(String userId);
+    List<BloodOxygenDto> getBO(int userId);
 
-    List<BloodPressureDto> getBP(String userId);
+    List<BloodPressureDto> getBP(int userId);
 
-    List<BloodSugarDto> getBS(String userId);
+    List<BloodSugarDto> getBS(int userId);
 
-    List<CholesterolDto> getCHO(String userId);
+    List<CholesterolDto> getCHO(int userId);
 
-    List<GlycerolDto> getTRI(String userId);
+    List<GlycerolDto> getTRI(int userId);
 
-    List<UricAcidDto> getURI(String userId);
+    List<UricAcidDto> getURI(int userId);
 
 }

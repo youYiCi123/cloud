@@ -13,7 +13,7 @@ public class BloodPressureServiceImpl implements BloodPressureService {
     private BloodPressureMapper bloodPressureMapper;
 
     @Override
-    public BloodPressureDto getLastedData(String userId) {
+    public BloodPressureDto getLastedData(int userId) {
         return bloodPressureMapper.getLastedData(userId);
     }
 

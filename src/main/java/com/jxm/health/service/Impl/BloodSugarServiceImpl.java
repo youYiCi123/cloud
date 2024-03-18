@@ -13,7 +13,7 @@ public class BloodSugarServiceImpl implements BloodSugarService {
     private BloodSugarMapper bloodSugarMapper;
 
     @Override
-    public BloodSugarDto getLastedData(String userId) {
+    public BloodSugarDto getLastedData(int userId) {
         return bloodSugarMapper.getLastedData(userId);
     }
 }

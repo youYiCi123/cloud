@@ -13,7 +13,7 @@ public class GlycerolServiceImpl implements GlycerolService {
     private GlycerolMapper glycerolMapper;
 
     @Override
-    public GlycerolDto getLastedData(String userId) {
+    public GlycerolDto getLastedData(int userId) {
         return glycerolMapper.getLastedData(userId);
     }
 }

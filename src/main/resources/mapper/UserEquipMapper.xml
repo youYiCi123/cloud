@@ -28,9 +28,6 @@
     <insert id="insertUserEquip" parameterType="com.jxm.health.model.UserEquipModel">
         insert into user_equip
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
             <if test="devId != null">
                 dev_id,
             </if>
@@ -39,9 +36,6 @@
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=BIGINT},
-            </if>
             <if test="devId != null">
                 #{devId,jdbcType=VARCHAR},
             </if>

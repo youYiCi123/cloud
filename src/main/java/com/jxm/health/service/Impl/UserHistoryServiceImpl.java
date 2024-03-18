@@ -36,38 +36,38 @@ public class UserHistoryServiceImpl implements UserHistoryService {
     private UricAcidMapper uricAcidMapper;
 
     @Override
-    public List<BloodKetoneDto> getBK(String userId) {
+    public List<BloodKetoneDto> getBK(int userId) {
         return bloodKetoneMapper.getItemHistory(userId);
     }
 
     @Override
-    public List<BloodOxygenDto> getBO(String userId) {
+    public List<BloodOxygenDto> getBO(int userId) {
         return bloodOxygenMapper.getItemHistory(userId);
     }
 
     @Override
-    public List<BloodPressureDto> getBP(String userId) {
+    public List<BloodPressureDto> getBP(int userId) {
         return bloodPressureMapper.getItemHistory(userId);
     }
 
     @Override
-    public List<BloodSugarDto> getBS(String userId) {
+    public List<BloodSugarDto> getBS(int userId) {
         return bloodSugarMapper.getItemHistory(userId);
     }
 
     @Override
-    public List<CholesterolDto> getCHO(String userId) {
+    public List<CholesterolDto> getCHO(int userId) {
         List<CholesterolDto> itemHistory = cholesterolMapper.getItemHistory(userId);
         return itemHistory;
     }
 
     @Override
-    public List<GlycerolDto> getTRI(String userId) {
+    public List<GlycerolDto> getTRI(int userId) {
         return glycerolMapper.getItemHistory(userId);
     }
 
     @Override
-    public List<UricAcidDto> getURI(String userId) {
+    public List<UricAcidDto> getURI(int userId) {
         return uricAcidMapper.getItemHistory(userId);
     }
 }

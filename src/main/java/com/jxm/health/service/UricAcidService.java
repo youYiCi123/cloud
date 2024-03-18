@@ -4,6 +4,6 @@ import com.jxm.health.dto.UricAcidDto;
 
 public interface UricAcidService {
 
-    UricAcidDto getLastedData(String userId);
+    UricAcidDto getLastedData(int userId);
 
 }

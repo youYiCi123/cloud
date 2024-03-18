@@ -1,6 +1,7 @@
 package com.jxm.health.service.Impl;
 
 import com.jxm.health.dto.UserDto;
+import com.jxm.health.dto.UserParam;
 import com.jxm.health.mapper.UserEquipMapper;
 import com.jxm.health.mapper.UserMapper;
 import com.jxm.health.model.UserByEquipModel;
@@ -14,10 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -39,18 +37,16 @@ public class UserServiceImpl implements UserService {
              return -1;
             }
             BeanUtils.copyProperties(userDto,userModel);
-            UniqueIdGenerator uniqueId = new UniqueIdGenerator(1,1);
-            long userId = uniqueId.nextId();
-            userModel.setId(String.valueOf(userId));
             userModel.setCreateTime(new Date());
             userMapper.addUser(userModel);
-            userEquipModel.setId(uniqueId.nextId());
-            userEquipModel.setUserId(String.valueOf(userId));
+            userEquipModel.setUserId(userModel.getId());
             userEquipModel.setDevId(userDto.getDevId());
+            userEquipMapper.insertUserEquip(userEquipModel);
+            return userModel.getId();
         }catch (Exception e) {
             e.printStackTrace();
         }
-        return userEquipMapper.insertUserEquip(userEquipModel);
+        return -1;
     }
 
 
@@ -63,4 +59,9 @@ public class UserServiceImpl implements UserService {
         return new ArrayList<>();
     }
 
+    @Override
+    public List<UserParam> getMyFamily(int userId) {
+
+        return userMapper.getMyFamily(userId);
+    }
 }

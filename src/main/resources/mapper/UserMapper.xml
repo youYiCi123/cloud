@@ -17,11 +17,11 @@
     </sql>
 
     <insert id="addUser" parameterType="com.jxm.health.model.UserModel">
+        <selectKey resultType="integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
         insert into user_detail
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
             <if test="nickName != null">
                 nick_name,
             </if>
@@ -34,17 +34,14 @@
             <if test="birthday != null">
                 birthday,
             </if>
-            <if test="unionId != null">
-                union_id,
+            <if test="openId != null">
+                open_id,
             </if>
             <if test="createTime != null">
                 create_time
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=BIGINT},
-            </if>
             <if test="nickName != null">
                 #{nickName,jdbcType=VARCHAR},
             </if>
@@ -57,8 +54,8 @@
             <if test="birthday != null">
                 #{birthday,jdbcType=TIMESTAMP},
             </if>
-            <if test="unionId != null">
-                #{unionId,jdbcType=VARCHAR},
+            <if test="openId != null">
+                #{openId,jdbcType=VARCHAR},
             </if>
             <if test="createTime != null">
                 #{createTime,jdbcType=TIMESTAMP}
@@ -66,5 +63,22 @@
         </trim>
     </insert>
 
+
+    <resultMap id="UserParam" type="com.jxm.health.dto.UserParam">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="nick_name" jdbcType="VARCHAR" property="nickName"/>
+        <result column="avatar_url" jdbcType="VARCHAR" property="avatarUrl"/>
+        <result column="gender" jdbcType="INTEGER" property="gender"/>
+    </resultMap>
+
+    <select id="getMyFamily" parameterType="java.lang.Integer" resultMap="UserParam">
+        select ud.id,ud.nick_name,ud.avatar_url,ud.gender from  user_detail ud
+        where ud.id in (
+        select ue2.user_id from user_equip ue1
+         left join user_equip ue2
+         on ue1.dev_id=ue2.dev_id
+         where ue1.user_id=#{user_id}
+        )
+    </select>
 
 </mapper>

@@ -56,4 +56,61 @@
         order by test_time desc
     </select>
 
+    <resultMap id="HalfYearData" type="com.jxm.health.dto.BPHalfYearData">
+        <result column="sys_average_value" jdbcType="INTEGER" property="SYSAverageValue"/>
+        <result column="dia_average_value" jdbcType="INTEGER" property="DIAAverageValue"/>
+        <result column="pul_average_value" jdbcType="INTEGER" property="PULAverageValue"/>
+        <result column="year" jdbcType="INTEGER" property="year"/>
+        <result column="month" jdbcType="INTEGER" property="month"/>
+    </resultMap>
+
+    <select id="getHalfYearTrend" parameterType="java.lang.Integer"  resultMap="HalfYearData">
+        		SELECT
+    YEAR(test_time) AS year,
+    MONTH(test_time) AS month,
+    AVG(SYS) AS sys_average_value,
+    AVG(DIA) AS dia_average_value,
+    AVG(PUL) AS pul_average_value
+FROM
+    blood_pressure
+WHERE
+		test_time BETWEEN CURDATE() - INTERVAL 6 MONTH AND CURDATE()
+		and user_id=#{userId}
+GROUP BY
+    YEAR(test_time), MONTH(test_time), YEAR(test_time)*12 + MONTH(test_time)
+ORDER BY
+    year DESC, month DESC;
+    </select>
+
+    <resultMap id="LastTimeData" type="com.jxm.health.dto.BPLastTestTimeDto">
+        <result column="SYS" jdbcType="INTEGER" property="SYS"/>
+        <result column="DIA" jdbcType="INTEGER" property="DIA"/>
+        <result column="PUL" jdbcType="INTEGER" property="PUL"/>
+        <result column="test_time" jdbcType="VARCHAR" property="testTime"/>
+        <result column="test_day" jdbcType="VARCHAR" property="testDay"/>
+    </resultMap>
+
+    <select id="getLastSevenTime" resultMap="LastTimeData">
+        SELECT
+	SYS,
+	DIA,
+	PUL,
+	test_time,
+	test_day
+FROM
+	(
+	SELECT
+		*,
+		ROW_NUMBER () OVER ( PARTITION BY date_format( test_time, '%Y-%m-%d' ) ORDER BY test_time DESC ) AS row_num,
+		date_format( test_time, '%Y-%m-%d' ) AS test_day
+	FROM
+		blood_pressure
+	) AS RankedData
+WHERE
+	user_id =#{userId}
+	AND row_num = 1
+ORDER BY
+	test_day DESC
+	LIMIT 7;
+    </select>
 </mapper>

@@ -63,7 +63,7 @@ public class UserDataController {
     @ApiOperation("小程序获取用户所有最新的监测数据")
     @RequestMapping(value = "/getUserLastedHealths", method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult getUserLastedHealths(@RequestParam(value = "userId") String userId){
+    public CommonResult getUserLastedHealths(@RequestParam(value = "userId") int userId){
         Map<String, Object> map = new HashMap<>(16);
         //血压
         map.put("bloodPressure", bloodPressureService.getLastedData(userId));
@@ -81,5 +81,7 @@ public class UserDataController {
         map.put("uricAcid", uricAcidService.getLastedData(userId));
         return CommonResult.success(map, "获取成功");
     }
+
+
 
 }

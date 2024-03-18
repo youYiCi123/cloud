@@ -12,7 +12,7 @@ public class CholesterolServiceImpl implements CholesterolService {
     @Autowired
     private CholesterolMapper cholesterolMapper;
     @Override
-    public CholesterolDto getLastedData(String userId) {
+    public CholesterolDto getLastedData(int userId) {
         return cholesterolMapper.getLastedData(userId);
     }
 }
