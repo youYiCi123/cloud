@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Data
 public class GlycerolModel {
-    private String userId;
+    private Integer userId;
     private Float TRI; //甘油
     private Date testTime;
 }

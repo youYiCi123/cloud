@@ -1,12 +1,15 @@
 package com.jxm.health.controller;
 
 import com.jxm.health.common.CommonResult;
+import com.jxm.health.dto.GlyLastTestTimeDto;
 import com.jxm.health.dto.UserDto;
 import com.jxm.health.dto.UserParam;
 import com.jxm.health.model.UserByEquipModel;
 import com.jxm.health.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +26,9 @@ public class UserController {
     private UserService userService;
 
     @ApiOperation("用户扫码后与设备绑定相关信息")
+    @ApiResponses({
+            @ApiResponse(code = 200,message = "返回用户id"),
+    })
     @RequestMapping(value = "/bindEquip", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult bindEquip(@RequestBody UserDto userDto) {

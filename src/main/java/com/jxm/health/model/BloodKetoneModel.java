@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Data
 public class BloodKetoneModel {
-    private String userId;
+    private Integer userId;
     private Float BK; //血酮
     private Date testTime;
 }

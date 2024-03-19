@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Data
 public class CholesterolModel {
-    private String userId;
+    private Integer userId;
     private Float CHO;//胆固醇
     private Date testTime;
 }

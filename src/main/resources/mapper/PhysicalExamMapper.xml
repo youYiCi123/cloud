@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jxm.health.mapper.PhysicalExamMapper">
+
+    <select id="getPhysicalExams" resultType="com.jxm.health.dto.PhysicalExamDto">
+        select
+        id,test_day
+        from physical_exam
+        where user_id=#{userId}
+        and bk_value IS NOT NULL
+        and bo_xy IS NOT NULL
+        and bp_sys IS NOT NULL
+        and bp_dia IS NOT NULL
+        and bp_pul IS NOT NULL
+        and bs_glu IS NOT NULL
+        and cho_value IS NOT NULL
+        and gly_value IS NOT NULL
+        and uri_value IS NOT NULL
+    </select>
+
+    <select id="judgeIfExists" resultType="java.lang.Integer">
+        select
+        id
+        from physical_exam
+        where user_id=#{userId}
+        and test_day=#{testDay}
+    </select>
+
+    <update id="updateById" parameterType="com.jxm.health.model.PhysicalExamModel">
+        update physical_exam
+        <set>
+            <if test="bkValue != null">
+                bk_value = #{bkValue,jdbcType=FLOAT},
+            </if>
+            <if test="bkTime != null">
+                bk_time = #{bkTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="boXy != null">
+                bo_xy = #{boXy,jdbcType=INTEGER},
+            </if>
+            <if test="boHr != null">
+                bo_hr = #{boHr,jdbcType=INTEGER},
+            </if>
+            <if test="boTime != null">
+                bo_time = #{boTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="bpSys != null">
+                bp_sys = #{bpSys,jdbcType=INTEGER},
+            </if>
+            <if test="bpDia != null">
+                bp_dia = #{bpDia,jdbcType=INTEGER},
+            </if>
+            <if test="bpPul != null">
+                bp_pul = #{bpPul,jdbcType=INTEGER},
+            </if>
+            <if test="bpTime != null">
+                bp_time = #{bpTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="bsEat != null">
+                bs_eat = #{bsEat,jdbcType=INTEGER},
+            </if>
+            <if test="bsGlu != null">
+                bs_glu = #{bsGlu,jdbcType=FLOAT},
+            </if>
+            <if test="bsTime != null">
+                bs_time = #{bsTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="choValue != null">
+                cho_value = #{choValue,jdbcType=FLOAT},
+            </if>
+            <if test="choTime != null">
+                cho_time = #{choTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="glyValue != null">
+                gly_value = #{glyValue,jdbcType=FLOAT},
+            </if>
+            <if test="glyTime != null">
+                gly_time = #{glyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="uriValue != null">
+                uri_value = #{uriValue,jdbcType=INTEGER},
+            </if>
+            <if test="uriTime != null">
+                uri_time = #{uriTime,jdbcType=TIMESTAMP}
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+
+    <delete id="deleteById" parameterType="java.lang.Integer">
+    delete from physical_exam
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+    <insert id="insert" parameterType="com.jxm.health.model.PhysicalExamModel">
+        insert into physical_exam
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="testDay != null">
+                test_day,
+            </if>
+            <if test="bkValue != null">
+                bk_value,
+            </if>
+            <if test="bkTime != null">
+                bk_time,
+            </if>
+            <if test="boXy != null">
+                bo_xy,
+            </if>
+            <if test="boHr != null">
+                bo_hr,
+            </if>
+            <if test="boTime != null">
+                bo_time,
+            </if>
+            <if test="bpSys != null">
+                bp_sys,
+            </if>
+            <if test="bpDia != null">
+                bp_dia,
+            </if>
+            <if test="bpPul != null">
+                bp_pul,
+            </if>
+            <if test="bpTime != null">
+                bp_time,
+            </if>
+            <if test="bsEat != null">
+                bs_eat,
+            </if>
+            <if test="bsGlu != null">
+                bs_glu,
+            </if>
+            <if test="bsTime != null">
+                bs_time,
+            </if>
+            <if test="choValue != null">
+                cho_value,
+            </if>
+            <if test="choTime != null">
+                cho_time,
+            </if>
+            <if test="glyValue != null">
+                gly_value,
+            </if>
+            <if test="glyTime != null">
+                gly_time,
+            </if>
+            <if test="uriValue != null">
+                uri_value,
+            </if>
+            <if test="uriTime != null">
+                uri_time
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="testDay != null">
+                #{testDay,jdbcType=FLOAT},
+            </if>
+            <if test="bkValue != null">
+                #{bkValue,jdbcType=FLOAT},
+            </if>
+            <if test="bkTime != null">
+                #{bkTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="boXy != null">
+                #{boXy,jdbcType=INTEGER},
+            </if>
+            <if test="boHr != null">
+                #{boHr,jdbcType=INTEGER},
+            </if>
+            <if test="boTime != null">
+               #{boTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="bpSys != null">
+                #{bpSys,jdbcType=INTEGER},
+            </if>
+            <if test="bpDia != null">
+                #{bpDia,jdbcType=INTEGER},
+            </if>
+            <if test="bpPul != null">
+               #{bpPul,jdbcType=INTEGER},
+            </if>
+            <if test="bpTime != null">
+               #{bpTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="bsEat != null">
+                #{bsEat,jdbcType=INTEGER},
+            </if>
+            <if test="bsGlu != null">
+                #{bsGlu,jdbcType=FLOAT},
+            </if>
+            <if test="bsTime != null">
+                #{bsTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="choValue != null">
+                #{choValue,jdbcType=FLOAT},
+            </if>
+            <if test="choTime != null">
+                #{choTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="glyValue != null">
+                #{glyValue,jdbcType=FLOAT},
+            </if>
+            <if test="glyTime != null">
+                #{glyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="uriValue != null">
+                #{uriValue,jdbcType=INTEGER},
+            </if>
+            <if test="uriTime != null">
+                #{uriTime,jdbcType=TIMESTAMP}
+            </if>
+        </trim>
+    </insert>
+
+
+</mapper>

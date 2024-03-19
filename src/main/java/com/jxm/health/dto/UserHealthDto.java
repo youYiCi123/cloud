@@ -11,7 +11,7 @@ public class UserHealthDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @JsonProperty("USERID")
-    private String USERID;//用户ID
+    private Integer USERID;//用户ID
     @JsonProperty("TESTTIME")
     private String TESTTIME;//测量时间
     @JsonProperty("SYS")
