@@ -9,6 +9,7 @@ import java.util.Date;
 public class PhysicalExamModel {
     private Integer id;
     private Integer userId;
+    private Integer gender;
     private String testDay;
     @ApiModelProperty("血酮值")
     private Float bkValue;

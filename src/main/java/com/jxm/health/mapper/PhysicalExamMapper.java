@@ -16,5 +16,7 @@ public interface PhysicalExamMapper {
 
     int insert(PhysicalExamModel physicalExamModel);
 
-    int deleteById(int id);
+    PhysicalExamModel getPhysicalExamInfoById(int id);
+
+    int deletePhysicalExamInfoById(int id);
 }

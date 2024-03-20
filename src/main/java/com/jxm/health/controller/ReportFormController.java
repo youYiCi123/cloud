@@ -121,7 +121,7 @@ public class ReportFormController {
     }
 
 
-    @ApiOperation(value = "血酮近七次检测值（按天划分，同一天检测多次按最后一次为标准且天不一定连续）")
+    @ApiOperation(value = "血酮近七天(检测周期)检测值", notes="以今天为基准往前推移的7次最近的测量时间且天不一定连续")
     @ApiResponses({
             @ApiResponse(code = 200,message = "OK",response = BKLastTestTimeDto.class),
     })
@@ -132,7 +132,7 @@ public class ReportFormController {
         return CommonResult.success(bk);
     }
 
-    @ApiOperation(value = "血氧近七次检测值（按天划分，同一天检测多次按最后一次为标准且天不一定连续）")
+    @ApiOperation(value = "血氧近七天(检测周期)检测值", notes="以今天为基准往前推移的7次最近的测量时间且天不一定连续")
     @ApiResponses({
             @ApiResponse(code = 200,message = "OK",response = BOLastTestTimeDto.class),
     })
@@ -143,7 +143,7 @@ public class ReportFormController {
         return CommonResult.success(bo);
     }
 
-    @ApiOperation(value = "血压近七次检测值（按天划分，同一天检测多次按最后一次为标准且天不一定连续）")
+    @ApiOperation(value = "血压近七天(检测周期)检测值", notes="以今天为基准往前推移的7次最近的测量时间且天不一定连续")
     @ApiResponses({
             @ApiResponse(code = 200,message = "OK",response = BPLastTestTimeDto.class),
     })
@@ -154,7 +154,7 @@ public class ReportFormController {
         return CommonResult.success(bp);
     }
 
-    @ApiOperation(value = "血糖近七次检测值（按天划分，同一天检测多次按最后一次为标准且天不一定连续）")
+    @ApiOperation(value = "血糖近七天(检测周期)检测值", notes="以今天为基准往前推移的7次最近的测量时间且天不一定连续")
     @ApiResponses({
             @ApiResponse(code = 200,message = "OK",response = BSLastTestTimeDto.class),
     })
@@ -166,7 +166,7 @@ public class ReportFormController {
         return CommonResult.success(bs);
     }
 
-    @ApiOperation(value = "胆固醇近七次检测值（按天划分，同一天检测多次按最后一次为标准且天不一定连续）")
+    @ApiOperation(value = "胆固醇近七天(检测周期)检测值", notes="以今天为基准往前推移的7次最近的测量时间且天不一定连续")
     @ApiResponses({
             @ApiResponse(code = 200,message = "OK",response = ChoLastTestTimeDto.class),
     })
@@ -177,7 +177,7 @@ public class ReportFormController {
         return CommonResult.success(cho);
     }
 
-    @ApiOperation(value = "甘油近七次检测值（按天划分，同一天检测多次按最后一次为标准且天不一定连续）")
+    @ApiOperation(value = "甘油近七天(检测周期)检测值", notes="以今天为基准往前推移的7次最近的测量时间且天不一定连续")
     @ApiResponses({
             @ApiResponse(code = 200,message = "OK",response = GlyLastTestTimeDto.class),
     })
@@ -188,7 +188,7 @@ public class ReportFormController {
         return CommonResult.success(gly);
     }
 
-    @ApiOperation(value = "尿酸近七次检测值（按天划分，同一天检测多次按最后一次为标准且天不一定连续）")
+    @ApiOperation(value = "尿酸近七天(检测周期)检测值", notes="以今天为基准往前推移的7次最近的测量时间且天不一定连续")
     @ApiResponses({
             @ApiResponse(code = 200,message = "OK",response = UriLastTestTimeDto.class),
     })

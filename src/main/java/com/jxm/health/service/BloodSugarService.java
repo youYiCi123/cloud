@@ -1,9 +1,10 @@
 package com.jxm.health.service;
 
 import com.jxm.health.dto.BloodSugarDto;
+import com.jxm.health.dto.BloodSugarTipDto;
 
 public interface BloodSugarService {
 
-    BloodSugarDto getLastedData(int userId);
+    BloodSugarTipDto getLastedData(int userId);
 
 }

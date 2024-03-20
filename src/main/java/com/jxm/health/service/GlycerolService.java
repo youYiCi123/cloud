@@ -1,9 +1,10 @@
 package com.jxm.health.service;
 
 import com.jxm.health.dto.GlycerolDto;
+import com.jxm.health.dto.GlycerolTipDto;
 
 public interface GlycerolService {
 
-    GlycerolDto getLastedData(int userId);
+    GlycerolTipDto getLastedData(int userId);
 
 }

@@ -1,5 +1,6 @@
 package com.jxm.health.thread;
 
+import com.jxm.health.common.HealthScoreStandard;
 import com.jxm.health.dto.*;
 import com.jxm.health.mapper.*;
 import com.jxm.health.utils.BeanContext;
@@ -15,13 +16,6 @@ public class HealthCall implements Callable<Integer> {
     private int detectionType;//1 血糖 尿酸 血酮 2 胆固醇 甘油三酯  3 血压
 
     private int totalScore = 0;
-
-    int bloodSugarScore = 25;//血糖分数
-    int bloodPressureScore = 35;//血压分数
-    int uricAcidScore = 10;//尿酸分数
-    int cholesterolScore = 10;//胆固醇分数
-    int bloodKetoneScore = 10;//血酮分数
-    int glycerolScore = 10;//甘油分数
 
     private BloodSugarMapper bloodSugarMapper;
 
@@ -59,16 +53,16 @@ public class HealthCall implements Callable<Integer> {
                 return 0;
             } else if ((bloodSugarDto.getEAT() == 0 && 3.90 <= bloodSugarDto.getGLU() && bloodSugarDto.getGLU() <= 6.10) ||
                     (bloodSugarDto.getEAT() == 1 && 3.90 <= bloodSugarDto.getGLU() && bloodSugarDto.getGLU() <= 7.80)) { //正常值
-                totalScore += bloodSugarScore;
+                totalScore += HealthScoreStandard.bloodSugarScore * HealthScoreStandard.bsNormalWeight;
             } else if (2.80 <= bloodSugarDto.getGLU() && bloodSugarDto.getGLU() <= 3.89) {//血糖偏低
-                totalScore += bloodSugarScore * 0.55;
+                totalScore += HealthScoreStandard.bloodSugarScore * HealthScoreStandard.bsLowWeight;
             } else if (bloodSugarDto.getGLU() <= 2.80) {//低血糖
-                totalScore += bloodSugarScore * 0.45;
+                totalScore += HealthScoreStandard.bloodSugarScore * HealthScoreStandard.bsLowerWeight;
             } else if ((bloodSugarDto.getEAT() == 0 && 6.11 <= bloodSugarDto.getGLU() && bloodSugarDto.getGLU() <= 7.00) ||
                     (bloodSugarDto.getEAT() == 1 && 7.81 <= bloodSugarDto.getGLU() && bloodSugarDto.getGLU() <= 11.10)) {//血糖边缘高值
-                totalScore += bloodSugarScore * 0.55;
+                totalScore += HealthScoreStandard.bloodSugarScore * HealthScoreStandard.bsEdgeHeightWeight;
             } else {
-                totalScore += bloodSugarScore * 0.45;
+                totalScore += HealthScoreStandard.bloodSugarScore * HealthScoreStandard.bsHeightWeight;
             }
 
 //尿酸打分
@@ -82,15 +76,15 @@ public class HealthCall implements Callable<Integer> {
                 return 0;
             } else if ((uricAcidDto.getGender() == 1 && 150 <= uricAcidDto.getURI() && uricAcidDto.getURI() < 416) ||
                     (uricAcidDto.getGender() == 2 && 89 <= uricAcidDto.getURI() && uricAcidDto.getURI() < 357)) {//正常值
-                totalScore += uricAcidScore;
+                totalScore += HealthScoreStandard.uricAcidScore*HealthScoreStandard.uricNormalWeight;
             } else if ((uricAcidDto.getGender() == 1 && uricAcidDto.getURI() > 420) ||
                     (uricAcidDto.getGender() == 2 && uricAcidDto.getURI() > 360)) {//高值
-                totalScore += uricAcidScore * 0.55;
+                totalScore += HealthScoreStandard.uricAcidScore * HealthScoreStandard.uricHeightWeight;
             } else {
-                totalScore += uricAcidScore * 0.45;
+                totalScore += HealthScoreStandard.uricAcidScore * HealthScoreStandard.uricHeightOrderWeight;
             }
 
-            //血酮
+ //血酮
 //        葡萄糖酮指数GKI=血糖值（mmol/L）/血酮值（mmol/L）
 //        GKI	    状态		应用
 //        ≤1	治疗性最高酮症状态	 需在医生指导下进行
@@ -105,17 +99,18 @@ public class HealthCall implements Callable<Integer> {
                 return 0;
             GKI = bloodSugarDto.getGLU() / bloodKetoneDto.getBK();
             if (GKI <= 1) {//治疗性最高酮症状态
-                totalScore += bloodKetoneScore * 0.25;
+                totalScore += HealthScoreStandard.bloodKetoneScore * HealthScoreStandard.bkFourLevelWeight;
             } else if (1 < GKI && GKI <= 3) {//治疗性高酮症状态
-                totalScore += bloodKetoneScore * 0.35;
+                totalScore += HealthScoreStandard.bloodKetoneScore * HealthScoreStandard.bkThreeLevelWeight;
             } else if (3 < GKI && GKI <= 6) {//治疗性高酮症状态
-                totalScore += bloodKetoneScore * 0.45;
+                totalScore += HealthScoreStandard.bloodKetoneScore * HealthScoreStandard.bkTwoLevelWeight;
             } else if (6 < GKI && GKI <= 9) {//初级酮症状态
-                totalScore += bloodKetoneScore * 0.55;
+                totalScore += HealthScoreStandard.bloodKetoneScore * HealthScoreStandard.bkOneLevelWeight;
             } else {//非酮症状态
-                totalScore += bloodKetoneScore;
+                totalScore += HealthScoreStandard.bloodKetoneScore *HealthScoreStandard.bkNormalWeight;
             }
-        } else if (detectionType == 2) {
+        }
+        else if (detectionType == 2) {
 //胆固醇
 //        检测值范围		检测值（mmol/L）
 //        正常值		    ＜5.18
@@ -126,11 +121,11 @@ public class HealthCall implements Callable<Integer> {
             if (cholesterolDto == null) {
                 return 0;
             } else if (cholesterolDto.getCHO() < 5.18) {//正常值
-                totalScore += cholesterolScore;
+                totalScore += HealthScoreStandard.cholesterolScore * HealthScoreStandard.choNormalWeight;
             } else if (5.18 <= cholesterolDto.getCHO() && cholesterolDto.getCHO() < 6.19) {//边缘升高
-                totalScore += cholesterolScore * 0.55;
+                totalScore += HealthScoreStandard.cholesterolScore * HealthScoreStandard.choEdgeHeightWeight;
             } else {//升高
-                totalScore += cholesterolScore * 0.45;
+                totalScore += HealthScoreStandard.cholesterolScore * HealthScoreStandard.choHeightWeight;
             }
 //甘油三酯
 //        检测值范围		检测值（mmol/L）
@@ -143,15 +138,14 @@ public class HealthCall implements Callable<Integer> {
             if (glycerolDto == null) {
                 return 0;
             } else if (glycerolDto.getTRI() < 1.70) {//正常值
-                totalScore += glycerolScore;
+                totalScore += HealthScoreStandard.glycerolScore *HealthScoreStandard.glyNormalWeight;
             } else if (1.70 < glycerolDto.getTRI() && glycerolDto.getTRI() < 2.25) {//边缘升高
-                totalScore += glycerolScore * 0.55;
+                totalScore += HealthScoreStandard.glycerolScore *HealthScoreStandard.glyOneLevelWeight;
             } else if (2.26 < glycerolDto.getTRI() && glycerolDto.getTRI() < 5.60) {//升高
-                totalScore += glycerolScore * 0.45;
+                totalScore += HealthScoreStandard.glycerolScore * HealthScoreStandard.glyTwoLevelWeight;
             } else {//高风险
-                totalScore += glycerolScore * 0.35;
+                totalScore += HealthScoreStandard.glycerolScore * HealthScoreStandard.glyThreeLevelWeight;
             }
-
         }
         else {
 //血压打分
@@ -167,21 +161,21 @@ public class HealthCall implements Callable<Integer> {
             if (bloodPressureDto == null) {
                 return 0;
             } else if (bloodPressureDto.getSYS() <= 90 || bloodPressureDto.getDIA() < 60) { //低血压
-                totalScore += bloodPressureScore * 0.45;
+                totalScore += HealthScoreStandard.bloodPressureScore * HealthScoreStandard.bpLowWeight;
             } else if (90 < bloodPressureDto.getSYS() && bloodPressureDto.getSYS() < 120 &&
                     60 < bloodPressureDto.getDIA() && bloodPressureDto.getDIA() < 80) {//正常血压
-                totalScore += bloodPressureScore;
+                totalScore += HealthScoreStandard.bloodPressureScore * HealthScoreStandard.bpNormalWeight;
             } else if ((120 < bloodPressureDto.getSYS() && bloodPressureDto.getSYS() < 139) ||
                     (80 < bloodPressureDto.getDIA() && bloodPressureDto.getDIA() < 89)) {//正常高值
-                totalScore += bloodPressureScore * 0.55;
+                totalScore += HealthScoreStandard.bloodPressureScore * HealthScoreStandard.bpNormalHeightWeight;
             } else if ((140 < bloodPressureDto.getSYS() && bloodPressureDto.getSYS() < 159) ||
                     (90 < bloodPressureDto.getDIA() && bloodPressureDto.getDIA() < 99)) {//1级高血压-轻度
-                totalScore += bloodPressureScore * 0.45;
+                totalScore += HealthScoreStandard.bloodPressureScore * HealthScoreStandard.bpOneLevelWeight;
             } else if ((160 < bloodPressureDto.getSYS() && bloodPressureDto.getSYS() < 179) ||
                     (100 < bloodPressureDto.getDIA() && bloodPressureDto.getDIA() < 109)) {//2级高血压-中度
-                totalScore += bloodPressureScore * 0.35;
+                totalScore += HealthScoreStandard.bloodPressureScore * HealthScoreStandard.bpTwoLevelWeight;
             } else {//3级高血压-重度
-                totalScore += bloodPressureScore * 0.30;
+                totalScore += HealthScoreStandard.bloodPressureScore * HealthScoreStandard.bpThreeLevelWeight;
             }
         }
         return totalScore;

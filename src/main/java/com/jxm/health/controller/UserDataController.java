@@ -70,13 +70,14 @@ public class UserDataController {
         //血氧
         map.put("bloodOxygen", bloodOxygenService.getLastedData(userId));
         //血糖
-        map.put("bloodSugar", bloodSugarService.getLastedData(userId));
+        BloodSugarTipDto bloodSugarTipDto = bloodSugarService.getLastedData(userId);
+        map.put("bloodSugar", bloodSugarTipDto);
         //胆固醇
         map.put("cholesterol", cholesterolService.getLastedData(userId));
         //甘油
         map.put("glycerol", glycerolService.getLastedData(userId));
         //血酮
-        map.put("bloodKetone", bloodKetoneService.getLastedData(userId));
+        map.put("bloodKetone", bloodKetoneService.getLastedData(userId,bloodSugarTipDto.getGLU()));
         //尿酸
         map.put("uricAcid", uricAcidService.getLastedData(userId));
         return CommonResult.success(map, "获取成功");

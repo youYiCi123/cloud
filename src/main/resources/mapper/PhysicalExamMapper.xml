@@ -18,6 +18,13 @@
         and uri_value IS NOT NULL
     </select>
 
+    <select id="getPhysicalExamInfoById" resultType="com.jxm.health.model.PhysicalExamModel">
+        select pe.*,ud.gender from physical_exam pe
+        left join user_detail ud
+        on ud.id=pe.user_id
+        where pe.id=#{id}
+    </select>
+
     <select id="judgeIfExists" resultType="java.lang.Integer">
         select
         id
@@ -88,7 +95,7 @@
     </update>
 
 
-    <delete id="deleteById" parameterType="java.lang.Integer">
+    <delete id="deletePhysicalExamInfoById" parameterType="java.lang.Integer">
     delete from physical_exam
     where id = #{id,jdbcType=INTEGER}
   </delete>

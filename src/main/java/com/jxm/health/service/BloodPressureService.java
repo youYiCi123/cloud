@@ -1,8 +1,9 @@
 package com.jxm.health.service;
 
 import com.jxm.health.dto.BloodPressureDto;
+import com.jxm.health.dto.BloodPressureTipDto;
 
 public interface BloodPressureService {
 
-    BloodPressureDto getLastedData(int userId);
+    BloodPressureTipDto getLastedData(int userId);
 }
