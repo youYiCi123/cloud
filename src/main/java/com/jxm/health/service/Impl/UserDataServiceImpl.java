@@ -5,6 +5,7 @@ import com.jxm.health.mapper.*;
 import com.jxm.health.model.*;
 import com.jxm.health.service.PhysicalExamService;
 import com.jxm.health.service.UserDataService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+@Slf4j
 @Service
 public class UserDataServiceImpl implements UserDataService {
 
@@ -41,6 +43,7 @@ public class UserDataServiceImpl implements UserDataService {
 
     @Override
     public int uploadReal(UserHealthDto userHealthDto) throws ParseException {
+        log.info("设备仪器上传数据");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         if(userHealthDto.getUSERID()==null||userHealthDto.getTESTTIME()==null){
@@ -93,9 +96,9 @@ public class UserDataServiceImpl implements UserDataService {
             count=bloodSugarMapper.insert(bloodSugarModel);
 
             //体测报告
-            physicalExamModel.setBoXy(userHealthDto.getXY());
-            physicalExamModel.setBoHr(userHealthDto.getHR());
-            physicalExamModel.setBoTime(testTime);
+            physicalExamModel.setBsEat(userHealthDto.getEAT());
+            physicalExamModel.setBsGlu(userHealthDto.getGLU());
+            physicalExamModel.setBsTime(testTime);
         }
         //胆固醇
         if(userHealthDto.getCHO()!=null&&!userHealthDto.getCHO().equals((float) 0)){

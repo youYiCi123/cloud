@@ -13,7 +13,7 @@ public class UserDto implements Serializable {
     private Integer gender;//性别
     private Date birthday;//出生日期
     private String openId;//微信平台下的id
-    private String devId;//设备序列号
+    private String imei;//设备唯一标识符
 
     public String getNickName() {
         return nickName;
@@ -55,12 +55,12 @@ public class UserDto implements Serializable {
         this.openId = openId;
     }
 
-    public String getDevId() {
-        return devId;
+    public String getImei() {
+        return imei;
     }
 
-    public void setDevId(String devId) {
-        this.devId = devId;
+    public void setImei(String imei) {
+        this.imei = imei;
     }
 
     @Override
@@ -71,7 +71,7 @@ public class UserDto implements Serializable {
                 ", gender=" + gender +
                 ", birthday=" + birthday +
                 ", openId='" + openId + '\'' +
-                ", devId='" + devId + '\'' +
+                ", imei='" + imei + '\'' +
                 '}';
     }
 }

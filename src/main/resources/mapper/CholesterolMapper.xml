@@ -45,7 +45,7 @@
     </select>
 
     <resultMap id="HalfYearData" type="com.jxm.health.dto.ChoHalfYearData">
-        <result column="average_value" jdbcType="FLOAT" property="averageValue"/>
+        <result column="average_value" jdbcType="FLOAT" property="CHOAverageValue"/>
         <result column="year" jdbcType="INTEGER" property="year"/>
         <result column="month" jdbcType="INTEGER" property="month"/>
     </resultMap>
@@ -84,7 +84,7 @@ FROM
 		ROW_NUMBER () OVER ( PARTITION BY date_format( test_time, '%Y-%m-%d' ) ORDER BY test_time DESC ) AS row_num,
 		date_format( test_time, '%Y-%m-%d' ) AS test_day
 	FROM
-		blood_pressure
+		cholesterol
 	) AS RankedData
 WHERE
 	user_id =#{userId}

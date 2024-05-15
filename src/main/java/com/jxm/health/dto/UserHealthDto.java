@@ -10,6 +10,7 @@ import java.io.Serializable;
 public class UserHealthDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @JsonProperty("USERID")
     private Integer USERID;//用户ID
     @JsonProperty("TESTTIME")

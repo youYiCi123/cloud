@@ -76,7 +76,7 @@
         where ud.id in (
         select ue2.user_id from user_equip ue1
          left join user_equip ue2
-         on ue1.dev_id=ue2.dev_id
+         on ue1.imei=ue2.imei
          where ue1.user_id=#{user_id}
         )
     </select>

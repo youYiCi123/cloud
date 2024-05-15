@@ -10,7 +10,7 @@ public interface UserService {
 
     int bindEquip(UserDto userDto);
 
-    List<UserByEquipModel> getAllUserByEquip(String devId);
+    List<UserByEquipModel> getAllUserByEquip(String imei);
 
     List<UserParam> getMyFamily(int userId);
 }

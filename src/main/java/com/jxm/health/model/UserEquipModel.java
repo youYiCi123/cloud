@@ -8,6 +8,6 @@ import lombok.Data;
 @Data
 public class UserEquipModel {
 
-    private String devId;
+    private String imei;
     private Integer userId;
 }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jxm.health.mapper.DeviceMapper">
+
+    <insert id="insert" parameterType="com.jxm.health.model.DeviceModel">
+        insert into device
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="imei != null">
+                imei,
+            </if>
+            <if test="productNumber != null">
+                product_number,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="delFlag != null">
+                del_flag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="imei != null">
+                #{imei,jdbcType=VARCHAR},
+            </if>
+            <if test="productNumber != null">
+                #{productNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="delFlag != null">
+                #{delFlag,jdbcType=INTEGER}
+            </if>
+        </trim>
+    </insert>
+
+    <select id="judgeIfExist" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*) from device where imei=#{imei,jdbcType=VARCHAR}
+    </select>
+
+</mapper>

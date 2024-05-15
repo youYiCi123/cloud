@@ -10,5 +10,6 @@ import java.util.Date;
 public class UriHalfYearData {
     @ApiModelProperty("尿酸平均值")
     private Integer averageValue;//尿酸
-    private Date testTime;
+    private Integer year;
+    private Integer month;
 }

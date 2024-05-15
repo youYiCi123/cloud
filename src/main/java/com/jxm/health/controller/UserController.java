@@ -1,6 +1,7 @@
 package com.jxm.health.controller;
 
 import com.jxm.health.common.CommonResult;
+import com.jxm.health.dto.ChoLastTestTimeDto;
 import com.jxm.health.dto.GlyLastTestTimeDto;
 import com.jxm.health.dto.UserDto;
 import com.jxm.health.dto.UserParam;
@@ -42,11 +43,14 @@ public class UserController {
         }
     }
 
-    @ApiOperation("根据设备序列号获取关联人员信息")
+    @ApiOperation("根据IMEI国际移动设备识别码获取绑定人员信息")
+    @ApiResponses({
+            @ApiResponse(code = 200,message = "OK",response = UserByEquipModel.class),
+    })
     @RequestMapping(value = "/getAllUserByEquip", method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult getAllUserByEquip(@RequestParam("DEVID") String devId) {
-        List<UserByEquipModel> userByEquips = userService.getAllUserByEquip(devId);
+    public CommonResult<List<UserByEquipModel>> getAllUserByEquip(@RequestParam("IMEI") String IMEI) {
+        List<UserByEquipModel> userByEquips = userService.getAllUserByEquip(IMEI);
         return CommonResult.success(userByEquips);
     }
 
