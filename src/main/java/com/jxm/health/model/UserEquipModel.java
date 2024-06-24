@@ -7,7 +7,6 @@ import lombok.Data;
 
 @Data
 public class UserEquipModel {
-
     private String imei;
     private Integer userId;
 }

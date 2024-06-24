@@ -44,4 +44,7 @@
         </trim>
     </insert>
 
+    <select id="getMyDevice" resultType="com.jxm.health.model.EquipModel">
+        select u.id,u.imei,d.equip_model from user_equip u left join device d on d.imei=u.imei where u.user_id=#{userId}
+    </select>
 </mapper>

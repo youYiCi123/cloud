@@ -5,6 +5,7 @@ import com.jxm.health.dto.ChoLastTestTimeDto;
 import com.jxm.health.dto.GlyLastTestTimeDto;
 import com.jxm.health.dto.UserDto;
 import com.jxm.health.dto.UserParam;
+import com.jxm.health.model.EquipModel;
 import com.jxm.health.model.UserByEquipModel;
 import com.jxm.health.service.UserService;
 import io.swagger.annotations.Api;
@@ -54,12 +55,12 @@ public class UserController {
         return CommonResult.success(userByEquips);
     }
 
-    @ApiOperation("小程序获取家庭组成员")
-    @RequestMapping(value = "/getMyFamily", method = RequestMethod.GET)
+    @ApiOperation("获取我绑定的设备")
+    @RequestMapping(value = "/getMyDevice", method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult getMyFamily(@RequestParam("userId") int userId) {
-        List<UserParam> familyUsers = userService.getMyFamily(userId);
-        return CommonResult.success(familyUsers);
+    public CommonResult getMyDevice(@RequestParam("userId") int userId) {
+        List<EquipModel> equipModels = userService.getMyDevice(userId);
+        return CommonResult.success(equipModels);
     }
 
 }

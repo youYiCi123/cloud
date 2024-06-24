@@ -63,6 +63,11 @@
         </trim>
     </insert>
 
+    <select id="selectUserByOpenId" resultType="java.lang.Integer">
+        select id
+        from user_detail
+        where open_id=#{openId,jdbcType=VARCHAR}
+    </select>
 
     <resultMap id="UserParam" type="com.jxm.health.dto.UserParam">
         <id column="id" jdbcType="BIGINT" property="id"/>

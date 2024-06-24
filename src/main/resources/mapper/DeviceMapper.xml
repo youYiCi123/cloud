@@ -11,9 +11,6 @@
             <if test="imei != null">
                 imei,
             </if>
-            <if test="productNumber != null">
-                product_number,
-            </if>
             <if test="createTime != null">
                 create_time,
             </if>
@@ -27,9 +24,6 @@
             </if>
             <if test="imei != null">
                 #{imei,jdbcType=VARCHAR},
-            </if>
-            <if test="productNumber != null">
-                #{productNumber,jdbcType=VARCHAR},
             </if>
             <if test="createTime != null">
                 #{createTime,jdbcType=TIMESTAMP},

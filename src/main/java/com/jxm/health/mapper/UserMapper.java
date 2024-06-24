@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface UserMapper {
 
-    int addUser(UserModel userModel);
+    Integer selectUserByOpenId(String openId);
+
+    Integer addUser(UserModel userModel);
 
     List<UserParam> getMyFamily(int userId);
 }

@@ -43,7 +43,6 @@ public class UserDataServiceImpl implements UserDataService {
 
     @Override
     public int uploadReal(UserHealthDto userHealthDto) throws ParseException {
-        log.info("设备仪器上传数据");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         if(userHealthDto.getUSERID()==null||userHealthDto.getTESTTIME()==null){

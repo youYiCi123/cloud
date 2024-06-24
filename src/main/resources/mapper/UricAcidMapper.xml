@@ -87,10 +87,11 @@ FROM
 		date_format( test_time, '%Y-%m-%d' ) AS test_day
 	FROM
 		uric_acid
+	where
+		user_id = #{userId}
 	) AS RankedData
 WHERE
-	user_id = #{userId}
-	AND row_num = 1
+ row_num = 1
 ORDER BY
 	test_day DESC
 	LIMIT 7;
